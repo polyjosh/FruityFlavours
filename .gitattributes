@@ -1,0 +1,3 @@
+# Keep design exports out of GitHub's language stats
+"FruityFlavours Design.html" linguist-documentation
+design/** linguist-documentation
