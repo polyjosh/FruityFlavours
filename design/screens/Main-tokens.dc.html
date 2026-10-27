@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>FruityFlavours design tokens</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+</style>
+</helmet>
+<div class="ff th-light" style="width: 1440px; min-height: 1760px; padding: 64px; display: flex; flex-direction: column; gap: 56px">
+  <header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 220px">
+      <h1 class="display-lg">Mautamu Healthy.</h1>
+      <p class="h3 muted" style="max-width: 640px; font-weight: 500">Design tokens for the shop and the admin panel. Names match the Tailwind theme so they can be dropped straight into tailwind.config.</p>
+    </div>
+    <div style="display: flex; gap: 16px">
+      <div style="width: 220px; height: 150px; border-radius: 16px; background: #ffffff; border: 1px solid #dbe3d3; display: flex; align-items: center; justify-content: center">
+        <img src="../assets/logo.png" alt="Logo on light" style="width: 150px">
+      </div>
+      <div style="width: 220px; height: 150px; border-radius: 16px; background: #121a14; display: flex; align-items: center; justify-content: center">
+        <img src="../assets/logo.png" alt="Logo on dark" style="width: 150px; filter: brightness(0) invert(1)">
+      </div>
+    </div>
+  </header>
+
+  <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+    <sc-for list="{{palettes}}" as="pal" hint-placeholder-count="2">
+      <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; align-items: baseline; justify-content: space-between">
+          <h2 class="h2">{{pal.name}}</h2>
+          <span class="micro muted">{{pal.note}}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
+          <sc-for list="{{pal.swatches}}" as="s" hint-placeholder-count="12">
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <div style="height: 72px; border-radius: 12px; border: 1px solid rgba(29,42,32,.12); background: {{s.hex}}"></div>
+              <div style="display: flex; flex-direction: column">
+                <span class="small strong">{{s.name}}</span>
+                <span class="small muted num">{{s.hex}}</span>
+                <span style="font-size: 12px; color: var(--muted)">{{s.use}}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px">
+    <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between">
+        <h2 class="h2">Type scale</h2>
+        <span class="micro muted">Bricolage Grotesque · system sans fallback</span>
+      </div>
+      <sc-for list="{{types}}" as="t" hint-placeholder-count="8">
+        <div style="display: grid; grid-template-columns: 170px 1fr; align-items: baseline; gap: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line)">
+          <div style="display: flex; flex-direction: column">
+            <span class="small strong">{{t.name}}</span>
+            <span style="font-size: 12px; color: var(--muted)">{{t.spec}}</span>
+          </div>
+          <span style="font-size: {{t.size}}; font-weight: {{t.weight}}; line-height: 1.1; letter-spacing: {{t.track}}">{{t.sample}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 32px">
+      <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <h2 class="h2">Spacing</h2>
+        <p class="small muted">4 px base. Screens use 16 px side gutters on mobile, 32 px on desktop.</p>
+        <sc-for list="{{spaces}}" as="sp" hint-placeholder-count="8">
+          <div style="display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 12px">
+            <span class="small num muted">{{sp.label}}</span>
+            <div style="height: 14px; border-radius: 4px; background: var(--green); width: {{sp.px}}"></div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 16px">
+        <h2 class="h2">Radius</h2>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap">
+          <sc-for list="{{radii}}" as="r" hint-placeholder-count="5">
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: center">
+              <div style="width: 72px; height: 72px; background: var(--green-soft); border: 2px solid var(--green); border-radius: {{r.px}}"></div>
+              <span class="small strong">{{r.label}}</span>
+              <span style="font-size: 12px; color: var(--muted)">{{r.use}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 16px">
+        <h2 class="h2">Shadows</h2>
+        <div style="display: flex; gap: 20px; padding: 8px 4px 12px">
+          <div style="flex: 1; height: 84px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: flex-end; padding: 12px"><span class="small strong">sm</span><span style="font-size: 12px; color: var(--muted)">Cards, rows</span></div>
+          <div style="flex: 1; height: 84px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: flex-end; padding: 12px"><span class="small strong">md</span><span style="font-size: 12px; color: var(--muted)">Menus, popovers</span></div>
+          <div style="flex: 1; height: 84px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; justify-content: flex-end; padding: 12px"><span class="small strong">lg</span><span style="font-size: 12px; color: var(--muted)">Cart button, toasts</span></div>
+        </div>
+        <p class="small muted">Dark mode keeps the same names with deeper, black-based shadows. Focus ring: 3 px mango outline, 2 px offset, on every control.</p>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1760}}">
+class Component extends DCLogic {
+  renderVals() {
+    const light = [
+      { name: 'leaf', hex: '#2f6b3c', use: 'Primary, links' },
+      { name: 'leaf-soft', hex: '#e2eedf', use: 'Selected fill' },
+      { name: 'mango', hex: '#f0992b', use: 'Accent, Coming soon' },
+      { name: 'mango-soft', hex: '#fdebd2', use: 'Notices, Preparing' },
+      { name: 'berry', hex: '#a3304f', use: 'Out of stock, delete' },
+      { name: 'berry-soft', hex: '#f8e3e9', use: 'Error fill' },
+      { name: 'bg', hex: '#f6f8f1', use: 'Page background' },
+      { name: 'surface', hex: '#ffffff', use: 'Cards, inputs' },
+      { name: 'surface-2', hex: '#edf2e6', use: 'Tags, tracks' },
+      { name: 'line', hex: '#dbe3d3', use: 'Dividers' },
+      { name: 'muted', hex: '#56665a', use: 'Secondary text' },
+      { name: 'text', hex: '#1d2a20', use: 'Body text' }
+    ];
+    const dark = [
+      { name: 'leaf', hex: '#6fbf80', use: 'Primary, links' },
+      { name: 'leaf-soft', hex: '#1f3a26', use: 'Selected fill' },
+      { name: 'mango', hex: '#f2a548', use: 'Accent, Coming soon' },
+      { name: 'mango-soft', hex: '#3a2a12', use: 'Notices, Preparing' },
+      { name: 'berry', hex: '#e0809b', use: 'Out of stock, delete' },
+      { name: 'berry-soft', hex: '#3b1d27', use: 'Error fill' },
+      { name: 'bg', hex: '#121a14', use: 'Page background' },
+      { name: 'surface', hex: '#1b261e', use: 'Cards, inputs' },
+      { name: 'surface-2', hex: '#243228', use: 'Tags, tracks' },
+      { name: 'line', hex: '#2d3c30', use: 'Dividers' },
+      { name: 'muted', hex: '#a3b3a2', use: 'Secondary text' },
+      { name: 'text', hex: '#eaf1e6', use: 'Body text' }
+    ];
+    return {
+      palettes: [
+        { name: 'Light', note: 'All text pairs pass 4.5:1', swatches: light },
+        { name: 'Dark', note: 'Berry lifted for contrast', swatches: dark }
+      ],
+      types: [
+        { name: 'Display XL', spec: '72 / 0.98 · 800 · desktop hero', size: '64px', weight: 800, track: '-0.035em', sample: 'Mautamu Healthy.' },
+        { name: 'Display', spec: '44 / 1.02 · 800 · mobile hero', size: '44px', weight: 800, track: '-0.03em', sample: 'Fresh today' },
+        { name: 'H1', spec: '28 / 1.15 · 750', size: '28px', weight: 750, track: '-0.02em', sample: 'Your cart' },
+        { name: 'H2', spec: '22 / 1.2 · 700', size: '22px', weight: 700, track: '-0.01em', sample: 'Sunrise Mango' },
+        { name: 'H3', spec: '18 / 1.3 · 650', size: '18px', weight: 650, track: '0', sample: 'Order summary' },
+        { name: 'Body', spec: '16 / 1.5 · 400', size: '16px', weight: 400, track: '0', sample: 'Pressed this morning in Ongata Rongai.' },
+        { name: 'Small', spec: '14 / 1.45 · 400–650', size: '14px', weight: 500, track: '0', sample: 'KES 214 per bottle' },
+        { name: 'Micro', spec: '12 / 1.4 · 700 · caps', size: '12px', weight: 700, track: '0.06em', sample: 'ORDER #FF-1042' }
+      ],
+      spaces: [4, 8, 12, 16, 24, 32, 48, 64].map((n) => ({ label: n + ' px', px: (n * 4) + 'px' })),
+      radii: [
+        { label: '8', px: '8px', use: 'Thumbs' },
+        { label: '10', px: '10px', use: 'Inputs' },
+        { label: '12', px: '12px', use: 'Buttons' },
+        { label: '16', px: '16px', use: 'Cards' },
+        { label: 'full', px: '999px', use: 'Chips' }
+      ]
+    };
+  }
+}
+</script>
+
+
+</body></html>

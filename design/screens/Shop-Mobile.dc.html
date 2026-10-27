@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Shop, mobile</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+</style>
+</helmet>
+<div class="board" style="width: 900px; min-height: 4700px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 390</p>
+      <div class="ff {{t.cls}} phone">
+        <header style="display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--surface)">
+          <a href="#" aria-label="FruityFlavours home" style="margin-right: auto"><img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 92px"></a>
+          <nav style="display: flex; gap: 2px" aria-label="Main">
+            <a class="hnav on" href="#" aria-current="page">Shop</a>
+            <a class="hnav" href="Account-Mobile.dc.html">Account</a>
+          </nav>
+          <a class="icon-btn" href="Cart-Mobile.dc.html" aria-label="Cart, {{cartCount}} items"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><span class="count">{{cartCount}}</span></a>
+        </header>
+
+        <section style="padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 14px">
+          <p class="micro" style="color: var(--orange-text)">Fresh in Ongata Rongai</p>
+          <h1 class="display">Mautamu Healthy.</h1>
+          <p class="muted" style="font-size: 17px">Cold-pressed juices, smoothies and cakes, made this morning. Delivered around Rongai or ready to pick up.</p>
+          <div class="photo" style="height: 190px; border-radius: 20px; background: #ffd59a; margin-top: 4px">
+            <svg width="300" height="170" sc-camel-view-box="0 0 300 170" aria-hidden="true">
+              <circle cx="40" cy="140" r="34" fill="#f0992b"></circle><circle cx="262" cy="136" r="30" fill="#8cbf4a"></circle>
+              <path d="M88 20h22v16c0 6 14 12 14 30v92H74V66c0-18 14-24 14-30z" fill="#4f7f33"></path><rect x="74" y="90" width="50" height="34" fill="#fff" opacity=".85"></rect>
+              <path d="M140 8h22v16c0 6 14 12 14 30v104h-50V54c0-18 14-24 14-30z" fill="#e0861c"></path><rect x="126" y="84" width="50" height="38" fill="#fff" opacity=".85"></rect>
+              <path d="M192 24h22v16c0 6 14 12 14 30v88h-50V70c0-18 14-24 14-30z" fill="#a3304f"></path><rect x="178" y="96" width="50" height="32" fill="#fff" opacity=".85"></rect>
+            </svg>
+            <span class="ph-label">Hero photo</span>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <span class="tag" style="background: var(--green-soft); color: var(--green-text)">Pay with M-Pesa</span>
+            <span class="tag">Delivery KES 150</span>
+            <span class="tag">Free pickup</span>
+          </div>
+        </section>
+
+        <section style="padding: 20px 16px 120px; display: flex; flex-direction: column; gap: 16px" aria-label="Products">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <h2 class="h1">Today's menu</h2>
+            <span class="small muted">{{visibleCount}} items</span>
+          </div>
+          <sc-if value="{{hasCats}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; gap: 8px" role="group" aria-label="Filter by category">
+              <sc-for list="{{cats}}" as="c" hint-placeholder-count="3">
+                <button class="{{c.cls}}" type="button" aria-pressed="{{c.pressed}}" sc-camel-on-click="{{c.pick}}">{{c.name}}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-for list="{{products}}" as="p" hint-placeholder-count="7">
+            <article class="card" style="overflow: hidden; display: flex; flex-direction: column">
+              <div class="{{p.photoCls}}" style="height: 168px; background: {{p.bg}}">
+                <sc-if value="{{p.isCake}}" hint-placeholder-val="{{false}}">
+                  <svg width="150" height="120" sc-camel-view-box="0 0 150 120" aria-hidden="true"><rect x="20" y="46" width="110" height="62" rx="8" fill="{{p.fg}}"></rect><rect x="20" y="70" width="110" height="7" fill="#fff4e4"></rect><path d="M20 54c9 8 18-6 27 0s18-6 27 0 18-6 28 0 19-6 28 0V46H20z" fill="#fff4e4"></path><circle cx="52" cy="38" r="7" fill="{{p.fruit}}"></circle><circle cx="76" cy="34" r="7" fill="#d9604a"></circle><circle cx="100" cy="38" r="7" fill="{{p.fruit}}"></circle></svg>
+                </sc-if>
+                <sc-if value="{{p.isBottle}}" hint-placeholder-val="{{true}}">
+                  <svg width="140" height="132" sc-camel-view-box="0 0 140 132" aria-hidden="true"><circle cx="112" cy="108" r="20" fill="{{p.fruit}}"></circle><circle cx="26" cy="112" r="14" fill="{{p.fruit}}" opacity=".7"></circle><path d="M58 4h24v16c0 6 14 12 14 30v74a6 6 0 0 1-6 6H50a6 6 0 0 1-6-6V50c0-18 14-24 14-30z" fill="{{p.fg}}"></path><rect x="44" y="64" width="52" height="34" fill="#fff" opacity=".85"></rect></svg>
+                </sc-if>
+                <span class="ph-label">Photo</span>
+                <sc-if value="{{p.isOos}}" hint-placeholder-val="{{false}}"><span class="badge badge-oos" style="position: absolute; left: 12px; top: 12px">Out of stock</span></sc-if>
+                <sc-if value="{{p.isSoon}}" hint-placeholder-val="{{false}}"><span class="badge badge-soon" style="position: absolute; left: 12px; top: 12px">Coming soon</span></sc-if>
+              </div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+                  <h3 class="h2">{{p.name}}</h3>
+                  <span class="h3 num" style="font-weight: 750; white-space: nowrap; color: {{p.priceColor}}">{{p.priceLabel}}</span>
+                </div>
+                <ul style="display: flex; flex-wrap: wrap; gap: 6px" aria-label="Ingredients">
+                  <sc-for list="{{p.ing}}" as="i" hint-placeholder-count="4"><li class="tag">{{i}}</li></sc-for>
+                </ul>
+                <p class="small muted">{{p.desc}}</p>
+                <sc-if value="{{p.hasOpts}}" hint-placeholder-val="{{true}}">
+                  <div style="display: flex; flex-direction: column; gap: 8px" role="group" aria-label="Choose an option">
+                    <sc-for list="{{p.opts}}" as="o" hint-placeholder-count="3">
+                      <button class="{{o.cls}}" type="button" aria-pressed="{{o.pressed}}" disabled="{{p.locked}}" sc-camel-on-click="{{o.pick}}"><span class="radio"></span><span class="opt-body"><span class="opt-title">{{o.t}}</span><span class="opt-sub">{{o.s}}</span></span><span class="opt-price">{{o.priceLabel}}</span></button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{p.singleLine}}" hint-placeholder-val="{{false}}">
+                  <p class="small" style="font-weight: 600">{{p.single}}</p>
+                </sc-if>
+                <sc-if value="{{p.isAdd}}" hint-placeholder-val="{{true}}">
+                  <button class="btn btn-primary btn-block" type="button" sc-camel-on-click="{{p.add}}">Add to cart</button>
+                </sc-if>
+                <sc-if value="{{p.isAdded}}" hint-placeholder-val="{{false}}">
+                  <button class="btn btn-added btn-block" type="button" sc-camel-on-click="{{p.add}}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Added to cart · add another</button>
+                </sc-if>
+                <sc-if value="{{p.isOos}}" hint-placeholder-val="{{false}}">
+                  <button class="btn btn-oos btn-block" type="button" disabled="">Out of stock</button>
+                </sc-if>
+                <sc-if value="{{p.isSoon}}" hint-placeholder-val="{{false}}">
+                  <button class="btn btn-soon btn-block" type="button" disabled="">Coming soon</button>
+                </sc-if>
+              </div>
+            </article>
+          </sc-for>
+        </section>
+
+        <footer style="padding: 28px 16px 32px; border-top: 1px solid var(--line); background: var(--surface); display: flex; flex-direction: column; gap: 14px">
+          <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 110px">
+          <p class="h3">Mautamu Healthy.</p>
+          <p class="small muted">Fresh juices, smoothies and cakes from Ongata Rongai, Kenya.</p>
+          <nav style="display: flex; gap: 8px; flex-wrap: wrap" aria-label="Social media">
+            <a class="icon-btn" href="#" aria-label="Instagram"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5h.01"></path></svg></a>
+            <a class="icon-btn" href="#" aria-label="Facebook"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"></path></svg></a>
+            <a class="icon-btn" href="#" aria-label="TikTok"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.8 2.4 4.6 5 5"></path></svg></a>
+            <a class="icon-btn" href="#" aria-label="X"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4.5L20 20h-4.5zM20 4l-6.6 7.2M4 20l6.6-7.2"></path></svg></a>
+            <a class="icon-btn" href="#" aria-label="YouTube"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"></rect><path d="M10 9.5v5l4.5-2.5z"></path></svg></a>
+            <a class="icon-btn" href="#" aria-label="WhatsApp"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"></path><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1-1.2 1.8.8"></path></svg></a>
+          </nav>
+          <p style="font-size: 12px" class="muted">© 2026 FruityFlavours · Ongata Rongai, Kenya</p>
+        </footer>
+
+        <sc-if value="{{toast}}" hint-placeholder-val="{{false}}">
+          <div class="toast" role="status" style="position: absolute; left: 16px; right: 16px; top: 692px"><span class="t-icon"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Added to cart<a href="Cart-Mobile.dc.html">View cart</a></div>
+        </sc-if>
+        <a class="fab" href="Cart-Mobile.dc.html" style="top: 768px; bottom: auto"><span style="display: flex; align-items: center; gap: 10px"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>Cart ({{cartCount}})</span><span class="num">KES {{cartTotal}}</span></a>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:4700}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 'All', sel: {}, added: { gg: true }, cartCount: 2, cartTotal: 1900, toast: false };
+  }
+  renderVals() {
+    const fmt = (n) => n.toLocaleString('en-US');
+    const P = [
+      { id: 'gg', name: 'Green Glow', cat: 'Drinks', bg: '#d5e8c0', fg: '#4f7f33', fruit: '#8cbf4a', status: 'sale', ing: ['Spinach', 'Cucumber', 'Green apple', 'Lime', 'Mint'], desc: 'Crisp, bright and green. Our everyday reset.', opts: [{ t: 'Single bottle', s: '500 ml', p: 400 }, { t: 'Pack of 7 bottles', s: '70 ml each · KES 214 a bottle', p: 1500 }, { t: 'Pack of 7 bottles', s: '1 L each · KES 371 a bottle', p: 2600 }] },
+      { id: 'sm', name: 'Sunrise Mango', cat: 'Drinks', bg: '#ffd59a', fg: '#e0861c', fruit: '#f0992b', status: 'sale', ing: ['Mango', 'Passion fruit', 'Orange', 'Ginger'], desc: 'Golden and zingy, with a little ginger kick.', opts: [{ t: 'Single bottle', s: '500 ml', p: 450 }, { t: 'Pack of 7 bottles', s: '70 ml each · KES 229 a bottle', p: 1600 }, { t: 'Pack of 7 bottles', s: '1 L each · KES 400 a bottle', p: 2800 }] },
+      { id: 'bb', name: 'Beet Boost', cat: 'Drinks', bg: '#f3c6d0', fg: '#a3304f', fruit: '#d9604a', status: 'sale', ing: ['Beetroot', 'Carrot', 'Apple', 'Lemon'], desc: 'Earthy, sweet and deep red. Great before a run.', opts: [{ t: 'Single bottle', s: '500 ml', p: 400 }, { t: 'Pack of 7 bottles', s: '70 ml each · KES 214 a bottle', p: 1500 }, { t: 'Pack of 7 bottles', s: '1 L each · KES 371 a bottle', p: 2600 }] },
+      { id: 'bo', name: 'Berry Oat Smoothie', cat: 'Drinks', bg: '#e6d3ea', fg: '#7a3f86', fruit: '#b05a9e', status: 'sale', ing: ['Mixed berries', 'Oats', 'Banana', 'Yoghurt'], desc: 'Thick and filling. Breakfast in a bottle.', opts: [{ t: 'Single bottle', s: '350 ml', p: 450 }] },
+      { id: 'cc', name: 'Coconut Cooler', cat: 'Drinks', bg: '#ece6d8', fg: '#8b7a5a', fruit: '#c8b894', status: 'oos', ing: ['Coconut water', 'Lime', 'Mint'], desc: 'Light and hydrating. Back very soon.', opts: [{ t: 'Single bottle', s: '500 ml', p: 380 }] },
+      { id: 'pm', name: 'Pineapple Mint Fizz', cat: 'Drinks', bg: '#f6eaa6', fg: '#a58d12', fruit: '#6fbf80', status: 'soon', ing: ['Pineapple', 'Mint', 'Sparkling water'], desc: 'A sparkling one for hot Rongai afternoons.', opts: [{ t: 'Single bottle', s: '330 ml', p: 0 }] },
+      { id: 'ck', name: 'Carrot Cake', cat: 'Cakes', bg: '#f5d3b0', fg: '#b8642a', fruit: '#f6efe2', status: 'sale', cake: true, ing: ['Carrot', 'Walnut', 'Cinnamon', 'Cream cheese'], desc: 'Moist, spiced and topped with cream cheese frosting.', opts: [{ t: '500 g cake', s: 'Serves 4', p: 1200 }, { t: '1 kg cake', s: 'Serves 8', p: 2200 }, { t: '2 kg cake', s: 'Serves 16', p: 4000 }] }
+    ];
+    const cats = ['All', ...Array.from(new Set(P.map((p) => p.cat)))];
+    const visible = P.filter((p) => this.state.cat === 'All' || p.cat === this.state.cat);
+    const products = visible.map((p) => {
+      const sel = this.state.sel[p.id] ?? 0;
+      const o = p.opts[sel];
+      const oos = p.status === 'oos';
+      const soon = p.status === 'soon';
+      const added = !!this.state.added[p.id];
+      return {
+        ...p,
+        isCake: !!p.cake,
+        isBottle: !p.cake,
+        photoCls: oos ? 'photo is-grey' : 'photo',
+        isOos: oos,
+        isSoon: soon,
+        isAdd: !oos && !soon && !added,
+        isAdded: !oos && !soon && added,
+        locked: oos || soon,
+        priceLabel: soon ? 'Price soon' : 'KES ' + fmt(o.p),
+        priceColor: soon ? 'var(--orange-text)' : 'var(--text)',
+        hasOpts: p.opts.length > 1,
+        singleLine: p.opts.length === 1,
+        single: o.t + ' · ' + o.s,
+        opts: p.opts.map((x, i) => ({
+          ...x,
+          priceLabel: 'KES ' + fmt(x.p),
+          cls: i === sel ? 'opt on' : 'opt',
+          pressed: i === sel ? 'true' : 'false',
+          pick: () => this.setState({ sel: { ...this.state.sel, [p.id]: i }, added: { ...this.state.added, [p.id]: false } })
+        })),
+        add: () => {
+          this.setState({ added: { ...this.state.added, [p.id]: true }, cartCount: this.state.cartCount + 1, cartTotal: this.state.cartTotal + o.p, toast: true });
+          clearTimeout(this.toastTimer);
+          this.toastTimer = setTimeout(() => this.setState({ toast: false }), 2600);
+        }
+      };
+    });
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      hasCats: cats.length > 2,
+      cats: cats.map((c) => ({ name: c, cls: c === this.state.cat ? 'pill on' : 'pill', pressed: c === this.state.cat ? 'true' : 'false', pick: () => this.setState({ cat: c }) })),
+      products,
+      visibleCount: products.length,
+      cartCount: this.state.cartCount,
+      cartTotal: fmt(this.state.cartTotal),
+      toast: this.state.toast
+    };
+  }
+  componentWillUnmount() { clearTimeout(this.toastTimer); }
+}
+</script>
+
+
+</body></html>

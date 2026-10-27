@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Admin orders</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.orow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;padding:14px 18px;border-top:1px solid var(--line)}
+.orow.sel{background:var(--green-soft);box-shadow:inset 3px 0 0 var(--green)}
+.status-btn{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:0 4px 0 0;border:0;background:none;cursor:pointer;font:inherit;color:var(--muted)}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14px}
+.kv dt{color:var(--muted)}
+</style>
+</helmet>
+<div class="board" style="width: 2680px; min-height: 1240px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 1280</p>
+      <div class="ff {{t.cls}} desk" style="display: flex; min-height: 1100px; font-size: 15px">
+        <aside class="side" aria-label="Admin">
+          <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 104px; margin: 0 0 4px 10px">
+          <span class="micro muted" style="padding: 0 12px 14px">Admin</span>
+          <a class="nav on" href="#" aria-current="page"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"></path></svg>Orders<span class="n">3</span></a>
+          <a class="nav" href="Admin-Catalog.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"></path><path d="M3 7.5l9 4.5 9-4.5M12 12v9"></path></svg>Catalog</a>
+          <a class="nav" href="Admin-Reports.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Reports</a>
+          <a class="nav" href="Admin-Notifications.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>Notifications</a>
+          <a class="nav" href="Admin-Settings.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>Settings</a>
+          <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
+            <a class="nav" href="Shop-Desktop.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View shop</a>
+            <a class="nav" href="Admin-SignIn.dc.html">Sign out</a>
+          </div>
+        </aside>
+
+        <main style="flex: 1; min-width: 0; padding: 24px 28px; display: flex; flex-direction: column; gap: 18px">
+          <div role="alert" style="display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 16px; border-radius: 14px; background: var(--orange); color: var(--on-orange); box-shadow: var(--shadow-md)">
+            <svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"></path></svg>
+            <span style="flex: 1"><strong>New order #FF-1044</strong> from Kevin Mwangi · KES 1,650 · pickup at Main shop · just now</span>
+            <button class="btn btn-sm" type="button" style="background: var(--on-orange); color: var(--orange)">Open order</button>
+            <button class="icon-btn" type="button" aria-label="Dismiss alert" style="background: transparent; border-color: transparent; color: inherit; width: 40px; height: 40px"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+            <h1 class="h1" style="margin-right: auto">Orders</h1>
+            <div style="position: relative; width: 260px"><label for="os-{{t.cls}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search orders</label><input class="input" id="os-{{t.cls}}" placeholder="Search name, phone or order no." style="min-height: 42px; padding-left: 38px; font-size: 14px"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; top: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></div>
+          </div>
+          <div style="display: flex; gap: 8px" role="group" aria-label="Filter orders">
+            <button class="pill pill-sm on" type="button" aria-pressed="true">Needs action · 4</button>
+            <button class="pill pill-sm" type="button">Today · 5</button>
+            <button class="pill pill-sm" type="button">Delivery</button>
+            <button class="pill pill-sm" type="button">Pickup</button>
+            <button class="pill pill-sm" type="button">All orders</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 20px; align-items: start">
+            <section class="panel" style="overflow: hidden" aria-label="Order list">
+              <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; padding: 10px 18px; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted)"><span>Order, customer &amp; products</span><span>Total &amp; status</span></div>
+              <sc-for list="{{orders}}" as="o" hint-placeholder-count="6">
+                <article class="{{o.rowCls}}">
+                  <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                    <div style="display: flex; align-items: center; gap: 10px"><span class="strong">{{o.no}}</span><span class="small muted">{{o.time}}</span><span class="tag" style="height: 22px; font-size: 12px">{{o.how}}</span></div>
+                    <span class="small"><strong>{{o.name}}</strong> · <a class="link" href="tel:{{o.phone}}" style="font-weight: 500">{{o.phone}}</a></span>
+                    <span class="small muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{o.items}}</span>
+                  </div>
+                  <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+                    <span class="strong num">KES {{o.total}}</span>
+                    <span style="font-size: 12px; font-weight: 650; color: {{o.payColor}}">{{o.pay}}</span>
+                    <button class="status-btn" type="button" aria-haspopup="listbox" aria-label="Status: {{o.status}}. Change status"><span class="{{o.chip}}">{{o.status}}</span><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                  </div>
+                </article>
+              </sc-for>
+            </section>
+
+            <aside class="panel" style="padding: 20px; display: flex; flex-direction: column; gap: 16px" aria-label="Order #FF-1043 details">
+              <div style="display: flex; align-items: center; justify-content: space-between"><h2 class="h2">#FF-1043</h2><button class="icon-btn" type="button" aria-label="Close details" style="width: 40px; height: 40px"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+              <span class="small muted" style="margin-top: -10px">Today, 10:12 · Delivery</span>
+              <div class="field">
+                <label class="label" for="st-{{t.cls}}">Status</label>
+                <div class="select-wrap"><sc-raw-select class="input" id="st-{{t.cls}}" style="min-height: 44px"><option>Awaiting payment</option><option>New</option><option selected="">Preparing</option><option>Ready</option><option>Out for delivery</option><option>Completed</option><option>Cancelled</option></sc-raw-select><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div>
+                <span class="hint">The customer gets an SMS when you change this.</span>
+              </div>
+              <hr class="divider">
+              <dl class="kv">
+                <dt>Customer</dt><dd class="strong">Wanjiru Kamau</dd>
+                <dt>Phone</dt><dd><a class="link" href="tel:0712345678">0712 345 678</a></dd>
+                <dt>Address</dt><dd>Kandisi Road, Maasai Lodge estate, house 14 (green gate)<br><a class="link" href="#" style="display: inline-flex; align-items: center; gap: 4px; margin-top: 4px">Open in Maps<svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></dd>
+              </dl>
+              <hr class="divider">
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+                <div style="display: flex; justify-content: space-between; gap: 12px"><span><strong>Green Glow</strong> · Pack of 7 × 70 ml ×1</span><span class="num">1,500</span></div>
+                <div style="display: flex; justify-content: space-between; gap: 12px"><span><strong>Sunrise Mango</strong> · 500 ml ×2</span><span class="num">900</span></div>
+                <div style="display: flex; justify-content: space-between; gap: 12px" class="muted"><span>Delivery</span><span class="num">150</span></div>
+                <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 16px; font-weight: 750"><span>Total <span class="small muted" style="font-weight: 500">incl. delivery</span></span><span class="num">KES 2,550</span></div>
+              </div>
+              <div class="notice notice-green" style="align-items: center"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>M-Pesa paid · receipt <strong>TJK8H2LQ4P</strong></span></div>
+              <button class="btn btn-primary btn-block" type="button">Mark as Out for delivery</button>
+              <button class="btn btn-danger-outline btn-block" type="button">Cancel order</button>
+            </aside>
+          </div>
+        </main>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:2680,&quot;height&quot;:1240}}">
+class Component extends DCLogic {
+  renderVals() {
+    const chip = { 'Awaiting payment': 'chip chip-await', 'New': 'chip chip-new', 'Preparing': 'chip chip-prep', 'Ready': 'chip chip-ready', 'Out for delivery': 'chip chip-out', 'Completed': 'chip chip-done', 'Cancelled': 'chip chip-cancel' };
+    const O = [
+      { no: '#FF-1044', time: '10:42', how: 'Pickup · Main shop', name: 'Kevin Mwangi', phone: '0733 902 114', items: 'Carrot Cake, 500 g ×1 · Berry Oat Smoothie, 350 ml ×1', total: '1,650', pay: 'Pay at pickup', payColor: 'var(--muted)', status: 'New' },
+      { no: '#FF-1043', time: '10:12', how: 'Delivery', name: 'Wanjiru Kamau', phone: '0712 345 678', items: 'Green Glow, Pack of 7 × 70 ml ×1 · Sunrise Mango, 500 ml ×2', total: '2,550', pay: 'M-Pesa paid · TJK8H2LQ4P', payColor: 'var(--green-text)', status: 'Preparing', sel: true },
+      { no: '#FF-1042', time: '09:55', how: 'Delivery', name: 'Achieng Odhiambo', phone: '0798 221 430', items: 'Beet Boost, Pack of 7 × 1 L ×1', total: '2,750', pay: 'M-Pesa pending', payColor: 'var(--orange-text)', status: 'Awaiting payment' },
+      { no: '#FF-1041', time: '09:20', how: 'Pickup · Gate Kiosk', name: 'Peter Kiprono', phone: '0701 556 872', items: 'Green Glow, 500 ml ×3', total: '1,200', pay: 'M-Pesa paid · TJK7Z1MD9A', payColor: 'var(--green-text)', status: 'Ready' },
+      { no: '#FF-1040', time: '08:47', how: 'Delivery', name: 'Faith Njeri', phone: '0720 118 344', items: 'Carrot Cake, 1 kg ×1 · Sunrise Mango, Pack of 7 × 70 ml ×1', total: '3,950', pay: 'Pay on delivery', payColor: 'var(--muted)', status: 'Out for delivery' },
+      { no: '#FF-1039', time: 'Yesterday 17:30', how: 'Pickup · Main shop', name: 'Samuel Mutua', phone: '0711 870 225', items: 'Beet Boost, 500 ml ×2', total: '800', pay: 'M-Pesa paid · TJJ4K8PL2C', payColor: 'var(--green-text)', status: 'Completed' }
+    ];
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      orders: O.map((o) => ({ ...o, chip: chip[o.status], rowCls: o.sel ? 'orow sel' : 'orow' }))
+    };
+  }
+}
+</script>
+
+
+</body></html>

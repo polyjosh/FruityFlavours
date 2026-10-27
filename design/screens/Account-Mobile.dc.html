@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Account, mobile</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.top{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface)}
+.code{width:48px;height:58px;border-radius:12px;border:1.5px solid var(--line-strong);background:var(--surface);color:var(--text);font:inherit;font-size:24px;font-weight:750;text-align:center}
+</style>
+</helmet>
+<div class="board" style="width: 1760px; min-height: 3900px; padding: 40px; display: flex; flex-direction: column; gap: 40px">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; gap: 40px; align-items: flex-start">
+
+      <div>
+        <p class="cap">{{t.name}} · log in</p>
+        <div class="ff {{t.cls}} phone" style="min-height: 844px">
+          <header class="top">
+            <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 92px; margin-right: auto">
+            <nav style="display: flex; gap: 2px" aria-label="Main"><a class="hnav" href="Shop-Mobile.dc.html">Shop</a><a class="hnav on" href="#" aria-current="page">Account</a></nav>
+            <a class="icon-btn" href="Cart-Mobile.dc.html" aria-label="Cart, 3 items"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><span class="count">3</span></a>
+          </header>
+          <div style="padding: 28px 20px; display: flex; flex-direction: column; gap: 18px">
+            <div class="seg" role="group" aria-label="Log in or sign up"><button class="on" type="button" aria-pressed="true">Log in</button><button type="button">Create account</button></div>
+            <h1 class="h1">Karibu tena!</h1>
+            <p class="muted" style="margin-top: -8px">Log in to see your orders and reorder in one tap.</p>
+            <div class="field"><label class="label" for="lp-{{t.cls}}">Phone number</label><div class="input-group"><span class="prefix">+254</span><input class="input" id="lp-{{t.cls}}" value="712 345 678" inputmode="tel" autocomplete="tel"></div></div>
+            <div class="field">
+              <label class="label" for="lpw-{{t.cls}}">Password</label>
+              <input class="input is-error" id="lpw-{{t.cls}}" type="password" value="password1" aria-invalid="true" aria-describedby="lpe-{{t.cls}}">
+              <span class="error-text" id="lpe-{{t.cls}}">That password doesn't match. Try again or reset it.</span>
+            </div>
+            <label class="check"><input type="checkbox" checked="">Keep me logged in on this phone</label>
+            <button class="btn btn-primary btn-lg btn-block" type="button">Log in</button>
+            <a class="link small" href="#" style="align-self: center; padding: 8px">Forgot password? We'll SMS you a code</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="cap">{{t.name}} · create account</p>
+        <div class="ff {{t.cls}} phone" style="min-height: 844px">
+          <header class="top">
+            <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 92px; margin-right: auto">
+            <nav style="display: flex; gap: 2px" aria-label="Main"><a class="hnav" href="Shop-Mobile.dc.html">Shop</a><a class="hnav on" href="#" aria-current="page">Account</a></nav>
+          </header>
+          <div style="padding: 28px 20px; display: flex; flex-direction: column; gap: 18px">
+            <div class="seg" role="group" aria-label="Log in or sign up"><button type="button">Log in</button><button class="on" type="button" aria-pressed="true">Create account</button></div>
+            <h1 class="h1">Create your account</h1>
+            <p class="muted" style="margin-top: -8px">Save your address, track orders and get updates by SMS.</p>
+            <div class="field"><label class="label" for="sn-{{t.cls}}">Your name</label><input class="input" id="sn-{{t.cls}}" value="Brian Otieno" autocomplete="name"></div>
+            <div class="field"><label class="label" for="sp-{{t.cls}}">Phone number</label><div class="input-group"><span class="prefix">+254</span><input class="input is-focus" id="sp-{{t.cls}}" value="722 418 905" inputmode="tel"></div><span class="hint">Use your M-Pesa number. We'll text a 6-digit code to check it.</span></div>
+            <div class="field"><label class="label" for="spw-{{t.cls}}">Password</label><input class="input" id="spw-{{t.cls}}" type="password" value="mautamu2026"><span class="hint">At least 8 characters.</span></div>
+            <button class="btn btn-primary btn-lg btn-block" type="button">Send me a code</button>
+            <p class="small muted" style="text-align: center">By signing up you agree to our <a class="link" href="#">terms</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="cap">{{t.name}} · SMS code</p>
+        <div class="ff {{t.cls}} phone" style="min-height: 844px">
+          <header class="top">
+            <a class="btn btn-ghost btn-sm" href="#" style="padding: 0 8px"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</a>
+          </header>
+          <div style="padding: 32px 20px; display: flex; flex-direction: column; gap: 18px">
+            <div class="big-ic" style="width: 72px; height: 72px; border-radius: 50%; background: var(--green-soft); color: var(--green-text); display: flex; align-items: center; justify-content: center"><svg width="32" height="32" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path><path d="M8 10h8"></path></svg></div>
+            <h1 class="h1">Enter the code we sent</h1>
+            <p class="muted" style="margin-top: -8px">Sent by SMS to <strong style="color: var(--text)">0722 418 905</strong>.</p>
+            <fieldset style="border: 0; padding: 0; margin: 0">
+              <legend class="label" style="margin-bottom: 8px">6-digit code</legend>
+              <div style="display: flex; gap: 8px">
+                <input class="code" aria-label="Digit 1" value="4" inputmode="numeric" maxlength="1">
+                <input class="code" aria-label="Digit 2" value="8" inputmode="numeric" maxlength="1">
+                <input class="code" aria-label="Digit 3" value="1" inputmode="numeric" maxlength="1">
+                <input class="code" aria-label="Digit 4" value="9" inputmode="numeric" maxlength="1">
+                <input class="code" aria-label="Digit 5" value="" inputmode="numeric" maxlength="1" style="border-color: var(--green); box-shadow: 0 0 0 3px var(--green-soft)">
+                <input class="code" aria-label="Digit 6" value="" inputmode="numeric" maxlength="1">
+              </div>
+            </fieldset>
+            <button class="btn btn-primary btn-lg btn-block" type="button" disabled="">Verify and continue</button>
+            <p class="small muted" style="text-align: center">Didn't get it? You can resend in 0:24.</p>
+            <a class="link small" href="#" style="align-self: center; padding: 8px">Wrong number? Change it</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="cap">{{t.name}} · logged in</p>
+        <div class="ff {{t.cls}} phone">
+          <header class="top">
+            <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 92px; margin-right: auto">
+            <nav style="display: flex; gap: 2px" aria-label="Main"><a class="hnav" href="Shop-Mobile.dc.html">Shop</a><a class="hnav on" href="#" aria-current="page">Account</a></nav>
+            <a class="icon-btn" href="Cart-Mobile.dc.html" aria-label="Cart, 3 items"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><span class="count">3</span></a>
+          </header>
+          <div style="padding: 24px 16px 32px; display: flex; flex-direction: column; gap: 24px">
+            <div style="display: flex; align-items: center; gap: 14px">
+              <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--orange); color: var(--on-orange); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px">WK</span>
+              <div style="display: flex; flex-direction: column"><h1 class="h2">Habari, Wanjiru</h1><span class="small muted">0712 345 678</span></div>
+            </div>
+
+            <section class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 8px" aria-label="Saved delivery address">
+              <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h3">Saved delivery address</h2><button class="btn btn-ghost btn-sm" type="button" style="color: var(--green-text)">Edit</button></div>
+              <p class="small">Kandisi Road, Maasai Lodge estate, house 14 (green gate)</p>
+              <span class="small muted" style="display: flex; align-items: center; gap: 6px"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Location pin saved</span>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 12px" aria-label="Order history">
+              <h2 class="h2">Your orders</h2>
+              <sc-for list="{{orders}}" as="o" hint-placeholder-count="3">
+                <article class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="strong">{{o.no}}</span><span class="{{o.chip}}">{{o.status}}</span></div>
+                  <span class="small muted">{{o.date}} · {{o.how}}</span>
+                  <ul style="display: flex; flex-direction: column; gap: 2px">
+                    <sc-for list="{{o.items}}" as="it" hint-placeholder-count="2"><li class="small">{{it}}</li></sc-for>
+                  </ul>
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+                    <div style="display: flex; flex-direction: column"><span class="strong num">KES {{o.total}}</span><span style="font-size: 13px; color: {{o.payColor}}; font-weight: 650">{{o.pay}}</span></div>
+                    <button class="btn btn-secondary btn-sm" type="button"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"></path></svg>Order again</button>
+                  </div>
+                </article>
+              </sc-for>
+            </section>
+
+            <section style="display: flex; flex-direction: column; gap: 12px" aria-label="Messages">
+              <h2 class="h2">Messages</h2>
+              <ul class="card" style="display: flex; flex-direction: column; overflow: hidden">
+                <sc-for list="{{messages}}" as="m" hint-placeholder-count="3">
+                  <li style="display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line)">
+                    <span class="dot" style="margin-top: 7px; background: {{m.dot}}"></span>
+                    <div style="display: flex; flex-direction: column; gap: 2px"><span class="small" style="font-weight: {{m.weight}}">{{m.text}}</span><span style="font-size: 12px" class="muted">{{m.when}}</span></div>
+                  </li>
+                </sc-for>
+              </ul>
+            </section>
+            <button class="btn btn-secondary btn-block" type="button">Log out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1760,&quot;height&quot;:3900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      orders: [
+        { no: '#FF-1043', date: 'Today, 10:12', how: 'Delivery', status: 'Preparing', chip: 'chip chip-prep', items: ['Green Glow · Pack of 7 × 70 ml ×1', 'Sunrise Mango · 500 ml ×2'], total: '2,550', pay: 'M-Pesa paid', payColor: 'var(--green-text)' },
+        { no: '#FF-1031', date: 'Sat 18 Oct', how: 'Pickup · Rongai Gate Kiosk', status: 'Completed', chip: 'chip chip-done', items: ['Carrot Cake · 1 kg cake ×1'], total: '2,200', pay: 'Paid at pickup', payColor: 'var(--muted)' },
+        { no: '#FF-1007', date: 'Fri 3 Oct', how: 'Delivery', status: 'Cancelled', chip: 'chip chip-cancel', items: ['Beet Boost · 500 ml ×3'], total: '1,350', pay: 'Not charged', payColor: 'var(--muted)' }
+      ],
+      messages: [
+        { text: 'Order #FF-1043: payment received. We are preparing it now.', when: 'Today, 10:14', dot: 'var(--green)', weight: 650 },
+        { text: 'Order #FF-1031 is ready at Rongai Gate Kiosk.', when: 'Sat 18 Oct, 15:40', dot: 'var(--line-strong)', weight: 400 },
+        { text: 'Pineapple Mint Fizz is coming soon. We will tell you when it lands.', when: 'Thu 16 Oct', dot: 'var(--line-strong)', weight: 400 }
+      ]
+    };
+  }
+}
+</script>
+
+
+</body></html>

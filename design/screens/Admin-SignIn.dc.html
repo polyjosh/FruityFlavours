@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Admin sign in</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+</style>
+</helmet>
+<div class="board" style="width: 2680px; min-height: 900px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 1280</p>
+      <div class="ff {{t.cls}} desk" style="display: grid; grid-template-columns: 1fr 1fr; height: 760px">
+        <div style="background: #2f6b3c; color: #ffffff; padding: 56px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden">
+          <img src="../assets/logo.png" alt="FruityFlavours" style="width: 200px; filter: brightness(0) invert(1)">
+          <svg width="420" height="300" sc-camel-view-box="0 0 300 170" aria-hidden="true" style="position: absolute; right: -40px; bottom: 120px; opacity: .22">
+            <circle cx="40" cy="140" r="34" fill="#f0992b"></circle><circle cx="262" cy="136" r="30" fill="#8cbf4a"></circle>
+            <path d="M88 20h22v16c0 6 14 12 14 30v92H74V66c0-18 14-24 14-30z" fill="#ffffff"></path>
+            <path d="M140 8h22v16c0 6 14 12 14 30v104h-50V54c0-18 14-24 14-30z" fill="#ffffff"></path>
+            <path d="M192 24h22v16c0 6 14 12 14 30v88h-50V70c0-18 14-24 14-30z" fill="#ffffff"></path>
+          </svg>
+          <div style="display: flex; flex-direction: column; gap: 10px; position: relative">
+            <p class="display">Mautamu Healthy.</p>
+            <p style="font-size: 17px; opacity: .9">Shop admin · orders, catalog and reports.</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 48px">
+          <form style="width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 18px" sc-camel-on-submit="{{submit}}">
+            <div><h1 class="h1">Admin sign in</h1><p class="muted">Staff only. Enter the admin password.</p></div>
+            <div class="field">
+              <label class="label" for="ap-{{t.cls}}">Password</label>
+              <div style="position: relative">
+                <input class="{{inputCls}}" id="ap-{{t.cls}}" type="{{pwType}}" value="mautamu-admin" style="padding-right: 150px" aria-invalid="{{error}}" aria-describedby="ae-{{t.cls}}" readonly="">
+                <button type="button" sc-camel-on-click="{{toggle}}" aria-pressed="{{shown}}" style="position: absolute; right: 4px; top: 4px; height: 40px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--green-text); font: inherit; font-weight: 650; font-size: 14px; cursor: pointer">{{toggleLabel}} password</button>
+              </div>
+              <sc-if value="{{error}}" hint-placeholder-val="{{true}}"><span class="error-text" id="ae-{{t.cls}}">Wrong password. 2 tries left before a 5-minute pause.</span></sc-if>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+            <p class="small muted">Forgot it? The owner can reset it from the server settings.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:2680,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { shown: false, error: true };
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      pwType: s.shown ? 'text' : 'password',
+      shown: s.shown ? 'true' : 'false',
+      toggleLabel: s.shown ? 'Hide' : 'Show',
+      toggle: () => this.setState({ shown: !s.shown }),
+      error: s.error,
+      inputCls: s.error ? 'input is-error' : 'input',
+      submit: (e) => { e.preventDefault(); this.setState({ error: false }); }
+    };
+  }
+}
+</script>
+
+
+</body></html>

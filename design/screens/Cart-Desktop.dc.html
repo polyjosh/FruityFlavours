@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Cart and checkout, desktop</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.sum{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.blk{display:flex;flex-direction:column;gap:14px;padding:24px;}
+</style>
+</helmet>
+<div class="board" style="width: 2680px; min-height: 1560px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 1280</p>
+      <div class="ff {{t.cls}} desk" style="padding-bottom: 64px">
+        <header style="border-bottom: 1px solid var(--line); background: var(--surface)">
+          <div class="wrap" style="display: flex; align-items: center; gap: 24px; height: 80px">
+            <a href="Shop-Desktop.dc.html" aria-label="FruityFlavours home"><img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 120px"></a>
+            <nav style="display: flex; gap: 4px; margin-right: auto" aria-label="Main"><a class="hnav" href="Shop-Desktop.dc.html">Shop</a><a class="hnav" href="Account-Desktop.dc.html">Account</a></nav>
+          </div>
+        </header>
+        <div class="wrap" style="padding-top: 28px; display: flex; flex-direction: column; gap: 20px">
+          <a class="btn btn-secondary btn-sm" href="Shop-Desktop.dc.html" style="align-self: flex-start"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back to shop</a>
+          <h1 class="h1" style="font-size: 36px">Cart &amp; checkout</h1>
+
+          <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
+            <div class="card" style="padding: 64px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+              <h2 class="h1">Your cart is empty</h2>
+              <p class="muted">Pick a juice, a smoothie or a slice of cake and it will show up here.</p>
+              <a class="btn btn-primary btn-lg" href="Shop-Desktop.dc.html">Browse the shop</a>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{hasItems}}" hint-placeholder-val="{{true}}">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 32px; align-items: start">
+              <div style="display: flex; flex-direction: column; gap: 24px">
+                <section class="card blk" aria-label="Cart items">
+                  <h2 class="h2">Items ({{itemCount}})</h2>
+                  <ul style="display: flex; flex-direction: column">
+                    <sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+                      <li style="display: grid; grid-template-columns: 72px 1fr auto auto; gap: 16px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line)">
+                        <div class="photo" style="width: 72px; height: 72px; border-radius: 12px; background: {{l.bg}}"><svg width="32" height="42" sc-camel-view-box="0 0 120 150" aria-hidden="true"><path d="M48 8h24v18c0 6 14 12 14 30v78a8 8 0 0 1-8 8H42a8 8 0 0 1-8-8V56c0-18 14-24 14-30z" fill="{{l.fg}}"></path></svg></div>
+                        <div style="display: flex; flex-direction: column; gap: 2px"><span class="strong" style="font-size: 17px">{{l.name}}</span><span class="small muted">{{l.opt}}</span><span class="small muted num">KES {{l.eachLabel}} each</span></div>
+                        <div class="stepper">
+                          <sc-if value="{{l.isOne}}" hint-placeholder-val="{{false}}"><button type="button" aria-label="Remove {{l.name}} from cart" sc-camel-on-click="{{l.dec}}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg></button></sc-if>
+                          <sc-if value="{{l.isMany}}" hint-placeholder-val="{{true}}"><button type="button" aria-label="Remove one {{l.name}}" sc-camel-on-click="{{l.dec}}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button></sc-if>
+                          <span class="qty" aria-live="polite">{{l.qty}}</span>
+                          <button type="button" aria-label="Add one {{l.name}}" sc-camel-on-click="{{l.inc}}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+                        </div>
+                        <span class="strong num" style="min-width: 100px; text-align: right">KES {{l.totalLabel}}</span>
+                      </li>
+                    </sc-for>
+                  </ul>
+                </section>
+
+                <section class="card blk" aria-label="Your details">
+                  <h2 class="h2">Your details</h2>
+                  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+                    <div class="field"><label class="label" for="dn-{{t.cls}}">Your name</label><input class="input" id="dn-{{t.cls}}" value="Wanjiru Kamau"></div>
+                    <div class="field"><label class="label" for="dp-{{t.cls}}">M-Pesa phone number</label><div class="input-group"><span class="prefix">+254</span><input class="input" id="dp-{{t.cls}}" value="712 345 678" inputmode="tel"></div></div>
+                    <div class="field" style="grid-column: 1 / -1"><label class="label" for="de-{{t.cls}}">Email <span class="opt-label">(optional, for a receipt)</span></label><input class="input" id="de-{{t.cls}}" placeholder="name@example.com" type="email"></div>
+                  </div>
+                </section>
+
+                <section class="card blk" aria-label="Delivery or pickup">
+                  <h2 class="h2">How do you want it?</h2>
+                  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+                    <button class="{{delCls}}" type="button" aria-pressed="{{isDelivery}}" sc-camel-on-click="{{setDelivery}}"><span class="radio"></span><span style="display: flex; flex-direction: column; gap: 2px"><span class="strong">Deliver to me</span><span class="small muted">Around Ongata Rongai · KES 150</span></span></button>
+                    <button class="{{pickCls}}" type="button" aria-pressed="{{isPickup}}" sc-camel-on-click="{{setPickup}}"><span class="radio"></span><span style="display: flex; flex-direction: column; gap: 2px"><span class="strong">I'll pick it up</span><span class="small muted">Free · ready in about 30 minutes</span></span></button>
+                  </div>
+                  <sc-if value="{{isDelivery}}" hint-placeholder-val="{{true}}">
+                    <div style="display: flex; flex-direction: column; gap: 14px">
+                      <div class="notice notice-orange" role="note"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"></path><circle cx="7" cy="18" r="1.8"></circle><circle cx="17.5" cy="18" r="1.8"></circle></svg><span>Delivery charges apply: <strong>KES 150</strong> will be added to your total.</span></div>
+                      <div class="field"><label class="label" for="da-{{t.cls}}">Delivery address</label><textarea class="input" id="da-{{t.cls}}" placeholder="Estate, street, house number or a landmark">Kandisi Road, Maasai Lodge estate, house 14 (green gate)</textarea></div>
+                      <sc-if value="{{notLocated}}" hint-placeholder-val="{{true}}">
+                        <button class="btn btn-secondary" type="button" sc-camel-on-click="{{locate}}" style="align-self: flex-start"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Share my current location <span class="opt-label">(optional)</span></button>
+                      </sc-if>
+                      <sc-if value="{{located}}" hint-placeholder-val="{{false}}">
+                        <div class="notice notice-green" role="status" style="align-items: center"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span style="flex: 1"><strong>Location shared.</strong> Our rider will see your pin.</span><button class="btn btn-ghost btn-sm" type="button" sc-camel-on-click="{{unlocate}}" style="color: inherit; text-decoration: underline">Remove</button></div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{isPickup}}" hint-placeholder-val="{{false}}">
+                    <div style="display: flex; flex-direction: column; gap: 14px">
+                      <div class="notice notice-green" role="note"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16l-1 11H5L4 9zM8 9V7a4 4 0 0 1 8 0v2"></path></svg><span>Pickup has no delivery charge.</span></div>
+                      <div class="field" style="max-width: 420px"><label class="label" for="dpp-{{t.cls}}">Pickup point</label><div class="select-wrap"><sc-raw-select class="input" id="dpp-{{t.cls}}"><option>Main shop – Ongata Rongai</option><option>Rongai Gate Kiosk</option></sc-raw-select><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div><span class="hint">Open every day, 7 am to 7 pm.</span></div>
+                    </div>
+                  </sc-if>
+                </section>
+
+                <section class="card blk" aria-label="Payment">
+                  <h2 class="h2">Payment</h2>
+                  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+                    <button class="{{mpesaCls}}" type="button" aria-pressed="{{isMpesa}}" sc-camel-on-click="{{setMpesa}}"><span class="radio"></span><span style="display: flex; flex-direction: column; gap: 2px"><span class="strong">M-Pesa</span><span class="small muted">A prompt is sent to your phone</span></span></button>
+                    <button class="{{codCls}}" type="button" aria-pressed="{{isCod}}" sc-camel-on-click="{{setCod}}"><span class="radio"></span><span style="display: flex; flex-direction: column; gap: 2px"><span class="strong">{{codTitle}}</span><span class="small muted">M-Pesa or cash when you get it</span></span></button>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="card blk" aria-label="Order summary">
+                <h2 class="h2">Order summary</h2>
+                <div class="sum"><span class="muted">Subtotal ({{itemCount}} items)</span><span class="num">KES {{subtotal}}</span></div>
+                <div class="sum"><span class="muted">{{deliveryLabel}}</span><span class="num">{{deliveryValue}}</span></div>
+                <hr class="divider">
+                <div class="sum" style="font-size: 20px; font-weight: 750"><span>Total</span><span class="num">KES {{total}}</span></div>
+                <a class="btn btn-primary btn-lg btn-block" href="Payment-Mobile.dc.html" style="margin-top: 6px">Place order · KES {{total}}</a>
+                <p class="small muted" style="text-align: center">You'll get an SMS as soon as your order is confirmed.</p>
+              </aside>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:2680,&quot;height&quot;:1560}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lines: [
+        { id: 'gg7', name: 'Green Glow', opt: 'Pack of 7 bottles, 70 ml each', each: 1500, qty: 1, bg: '#d5e8c0', fg: '#4f7f33' },
+        { id: 'sm1', name: 'Sunrise Mango', opt: 'Single bottle, 500 ml', each: 450, qty: 2, bg: '#ffd59a', fg: '#e0861c' }
+      ],
+      mode: 'pickup',
+      pay: 'mpesa',
+      located: false
+    };
+  }
+  renderVals() {
+    const fmt = (n) => n.toLocaleString('en-US');
+    const s = this.state;
+    const setQty = (id, d) => this.setState({ lines: s.lines.map((l) => l.id === id ? { ...l, qty: l.qty + d } : l).filter((l) => l.qty > 0) });
+    const subtotal = s.lines.reduce((a, l) => a + l.each * l.qty, 0);
+    const delivery = s.mode === 'delivery';
+    const has = s.lines.length > 0;
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      isEmpty: !has,
+      hasItems: has,
+      lines: s.lines.map((l) => ({ ...l, eachLabel: fmt(l.each), totalLabel: fmt(l.each * l.qty), isOne: l.qty === 1, isMany: l.qty > 1, inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1) })),
+      itemCount: s.lines.reduce((a, l) => a + l.qty, 0),
+      subtotal: fmt(subtotal),
+      deliveryLabel: delivery ? 'Delivery' : 'Pickup',
+      deliveryValue: delivery ? 'KES 150' : 'Free',
+      total: fmt(subtotal + (delivery ? 150 : 0)),
+      isDelivery: delivery,
+      isPickup: !delivery,
+      delCls: delivery ? 'choice on' : 'choice',
+      pickCls: delivery ? 'choice' : 'choice on',
+      setDelivery: () => this.setState({ mode: 'delivery' }),
+      setPickup: () => this.setState({ mode: 'pickup' }),
+      located: s.located,
+      notLocated: !s.located,
+      locate: () => this.setState({ located: true }),
+      unlocate: () => this.setState({ located: false }),
+      isMpesa: s.pay === 'mpesa',
+      isCod: s.pay !== 'mpesa',
+      mpesaCls: s.pay === 'mpesa' ? 'choice on' : 'choice',
+      codCls: s.pay === 'mpesa' ? 'choice' : 'choice on',
+      codTitle: delivery ? 'Pay on delivery' : 'Pay at pickup',
+      setMpesa: () => this.setState({ pay: 'mpesa' }),
+      setCod: () => this.setState({ pay: 'cod' })
+    };
+  }
+}
+</script>
+
+
+</body></html>

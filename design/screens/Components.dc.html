@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>FruityFlavours component sheet</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec>h3{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+</style>
+</helmet>
+<div class="board" style="width: 1760px; min-height: 2600px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="width: 820px; display: flex; flex-direction: column">
+      <p class="cap">{{t.name}}</p>
+      <div class="ff {{t.cls}}" style="border-radius: 20px; padding: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 32px; box-shadow: 0 0 0 1px rgba(29,42,32,.08)">
+
+        <section class="sec" style="grid-column: 1 / -1">
+          <h3>Buttons</h3>
+          <div class="row">
+            <button class="btn btn-primary" type="button">Add to cart</button>
+            <button class="btn btn-secondary" type="button">Back to shop</button>
+            <button class="btn btn-danger" type="button">Delete</button>
+            <button class="btn btn-danger-outline" type="button">Cancel order</button>
+            <button class="btn btn-ghost" type="button">Skip</button>
+            <button class="btn" type="button" disabled="">Disabled</button>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary focus-demo" type="button">Focus ring</button>
+            <button class="btn btn-primary btn-sm" type="button">Small</button>
+            <button class="btn btn-secondary btn-sm" type="button"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add product</button>
+            <button class="btn btn-danger btn-sm" type="button"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg>Tap again to confirm</button>
+            <button class="icon-btn" type="button" aria-label="Cart, 3 items"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg><span class="count">3</span></button>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary btn-lg" type="button" style="min-width: 300px">Place order · KES 2,050</button>
+            <button class="btn btn-primary btn-lg" type="button" disabled="" style="min-width: 220px">Placing order…</button>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>Inputs</h3>
+          <div class="field">
+            <label class="label" for="c-name-{{t.cls}}">Your name</label>
+            <input class="input" id="c-name-{{t.cls}}" value="Wanjiru Kamau">
+          </div>
+          <div class="field">
+            <label class="label" for="c-phone-{{t.cls}}">M-Pesa phone</label>
+            <div class="input-group"><span class="prefix">+254</span><input class="input is-focus" id="c-phone-{{t.cls}}" value="712 345 678" inputmode="tel"></div>
+            <span class="hint">We send the payment prompt to this number.</span>
+          </div>
+          <div class="field">
+            <label class="label" for="c-email-{{t.cls}}">Email <span class="opt-label">(optional)</span></label>
+            <input class="input is-error" id="c-email-{{t.cls}}" value="wanjiru@" aria-invalid="true">
+            <span class="error-text">Enter a full email, like name@example.com</span>
+          </div>
+          <div class="field">
+            <label class="label" for="c-pick-{{t.cls}}">Pickup point</label>
+            <div class="select-wrap">
+              <sc-raw-select class="input" id="c-pick-{{t.cls}}"><option>Main shop – Ongata Rongai</option><option>Rongai Gate Kiosk</option></sc-raw-select>
+              <svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>Option buttons</h3>
+          <button class="opt" type="button"><span class="radio"></span><span class="opt-body"><span class="opt-title">Single bottle</span><span class="opt-sub">500 ml</span></span><span class="opt-price">KES 400</span></button>
+          <button class="opt on" type="button" aria-pressed="true"><span class="radio"></span><span class="opt-body"><span class="opt-title">Pack of 7 bottles</span><span class="opt-sub">70 ml each · KES 214 a bottle</span></span><span class="opt-price">KES 1,500</span></button>
+          <button class="opt" type="button" disabled=""><span class="radio"></span><span class="opt-body"><span class="opt-title">Pack of 7 bottles</span><span class="opt-sub">1 L each · sold out</span></span><span class="opt-price">KES 2,600</span></button>
+          <h3 style="margin-top: 10px">Quantity stepper</h3>
+          <div class="row">
+            <div class="stepper"><button type="button" aria-label="Remove item"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg></button><span class="qty">1</span><button type="button" aria-label="Add one"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+            <div class="stepper"><button type="button" aria-label="Remove one"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="qty">3</span><button type="button" aria-label="Add one"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+          </div>
+          <span class="hint">At 1, minus becomes a bin: tapping it removes the line.</span>
+        </section>
+
+        <section class="sec">
+          <h3>Order status chips</h3>
+          <div class="row">
+            <span class="chip chip-await">Awaiting payment</span>
+            <span class="chip chip-new">New</span>
+            <span class="chip chip-prep">Preparing</span>
+            <span class="chip chip-ready">Ready</span>
+            <span class="chip chip-out">Out for delivery</span>
+            <span class="chip chip-done">Completed</span>
+            <span class="chip chip-cancel">Cancelled</span>
+          </div>
+          <h3 style="margin-top: 6px">Payment</h3>
+          <div class="row">
+            <span class="chip chip-ready">M-Pesa paid</span>
+            <span class="chip chip-prep">M-Pesa pending</span>
+            <span class="chip chip-await">Pay on delivery</span>
+            <span class="chip chip-fail">Payment failed</span>
+          </div>
+          <h3 style="margin-top: 6px">Badges</h3>
+          <div class="row">
+            <span class="badge badge-oos">Out of stock</span>
+            <span class="badge badge-soon">Coming soon</span>
+            <span class="badge badge-primary"><svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8L3.5 9.7l5.9-.9z"></path></svg>Primary photo</span>
+            <span class="badge badge-cat">Cakes</span>
+            <span class="tag">Mango</span><span class="tag">Ginger</span>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>Toasts</h3>
+          <div class="toast" role="status"><span class="t-icon"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Added to cart<a href="#">View cart</a></div>
+          <div class="toast" role="status"><span class="t-icon"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Payment received · KES 2,050</div>
+          <div class="toast" role="alert"><span class="t-icon" style="background: var(--berry); color: var(--on-berry)"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 7v6M12 17v.01"></path></svg></span>Couldn't save. Check your connection.<button type="button">Retry</button></div>
+          <h3 style="margin-top: 6px">Notices</h3>
+          <div class="notice notice-orange"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"></path><circle cx="7" cy="18" r="1.8"></circle><circle cx="17.5" cy="18" r="1.8"></circle></svg><span>Delivery charges apply: KES 150 will be added to your total.</span></div>
+          <div class="notice notice-green"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16l-1 11H5L4 9zM8 9V7a4 4 0 0 1 8 0v2"></path></svg><span>Pickup has no delivery charge.</span></div>
+        </section>
+
+        <section class="sec">
+          <h3>Tabs &amp; filters</h3>
+          <nav class="tabs" aria-label="Main"><a class="tab on" href="#" aria-current="page">Shop</a><a class="tab" href="#">Account</a></nav>
+          <div class="row"><button class="pill on" type="button" aria-pressed="true">All</button><button class="pill" type="button">Drinks</button><button class="pill" type="button">Cakes</button></div>
+          <div class="seg" role="group" aria-label="Fulfilment"><button class="on" type="button" aria-pressed="true">Deliver to me</button><button type="button">I'll pick it up</button></div>
+        </section>
+
+        <section class="sec">
+          <h3>Product card · button states</h3>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <button class="btn btn-primary" type="button">Add to cart</button>
+            <button class="btn btn-added" type="button"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Added to cart</button>
+            <button class="btn btn-oos" type="button" disabled="">Out of stock</button>
+            <button class="btn btn-soon" type="button" disabled="">Coming soon</button>
+          </div>
+          <h3 style="margin-top: 6px">Photo tiles</h3>
+          <div class="row" style="align-items: flex-start">
+            <div style="display: flex; flex-direction: column; gap: 6px; width: 112px">
+              <div class="photo" style="height: 112px; border-radius: 12px; background: #ffd59a; box-shadow: inset 0 0 0 3px var(--green)">
+                <svg width="56" height="80" sc-camel-view-box="0 0 120 150" aria-hidden="true"><path d="M48 8h24v18c0 6 14 12 14 30v78a8 8 0 0 1-8 8H42a8 8 0 0 1-8-8V56c0-18 14-24 14-30z" fill="#e0861c"></path><rect x="34" y="74" width="52" height="34" fill="#fff" opacity=".85"></rect></svg>
+                <span class="badge badge-primary" style="position: absolute; left: 6px; top: 6px; height: 22px; padding: 0 8px; font-size: 11px">Primary</span>
+              </div>
+              <span style="font-size: 12px" class="muted">Primary</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; width: 112px">
+              <div class="photo" style="height: 112px; border-radius: 12px; background: #fde7c4">
+                <svg width="70" height="70" sc-camel-view-box="0 0 100 100" aria-hidden="true"><circle cx="40" cy="55" r="26" fill="#f0992b"></circle><circle cx="66" cy="46" r="18" fill="#e0861c"></circle><path d="M40 29c4-10 12-14 20-14-2 8-8 14-20 14z" fill="#5d8f3a"></path></svg>
+              </div>
+              <span style="font-size: 12px" class="muted">Photo 2</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; width: 112px">
+              <div class="photo" style="height: 112px; border-radius: 12px; background: #d5e8c0">
+                <span style="font-size: 44px" role="img" aria-label="Emoji fallback, cup with straw">🥤</span>
+              </div>
+              <span style="font-size: 12px" class="muted">No photo: emoji</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; width: 112px">
+              <div style="height: 112px; border-radius: 12px; border: 2px dashed var(--line-strong); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--muted)">
+                <svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"></path></svg>
+                <span style="font-size: 13px; font-weight: 650">Add photos</span>
+              </div>
+              <span style="font-size: 12px" class="muted">Upload</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>Product card</h3>
+          <article class="card" style="overflow: hidden; display: flex; flex-direction: column">
+            <div class="photo" style="height: 168px; background: #ffd59a">
+              <svg width="96" height="120" sc-camel-view-box="0 0 120 150" aria-hidden="true"><path d="M48 8h24v18c0 6 14 12 14 30v78a8 8 0 0 1-8 8H42a8 8 0 0 1-8-8V56c0-18 14-24 14-30z" fill="#e0861c"></path><rect x="34" y="74" width="52" height="34" fill="#fff" opacity=".85"></rect><circle cx="100" cy="128" r="14" fill="#f0992b"></circle></svg>
+            </div>
+            <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><h4 class="h2">Sunrise Mango</h4><span class="h3 num" style="font-weight: 750">KES 450</span></div>
+              <div class="row" style="gap: 6px"><span class="tag">Mango</span><span class="tag">Passion fruit</span><span class="tag">Orange</span><span class="tag">Ginger</span></div>
+              <p class="small muted">Golden, zingy and sunny. A little ginger kick.</p>
+              <button class="opt on" type="button" aria-pressed="true"><span class="radio"></span><span class="opt-body"><span class="opt-title">Single bottle</span><span class="opt-sub">500 ml</span></span><span class="opt-price">KES 450</span></button>
+              <button class="opt" type="button"><span class="radio"></span><span class="opt-body"><span class="opt-title">Pack of 7 bottles</span><span class="opt-sub">70 ml each · KES 229 a bottle</span></span><span class="opt-price">KES 1,600</span></button>
+              <button class="btn btn-primary btn-block" type="button">Add to cart</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="sec">
+          <h3>Cart line</h3>
+          <div class="card" style="padding: 14px; display: flex; gap: 12px">
+            <div class="photo thumb" style="width: 64px; height: 64px; background: #d5e8c0"><svg width="30" height="38" sc-camel-view-box="0 0 120 150" aria-hidden="true"><path d="M48 8h24v18c0 6 14 12 14 30v78a8 8 0 0 1-8 8H42a8 8 0 0 1-8-8V56c0-18 14-24 14-30z" fill="#4f7f33"></path></svg></div>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; justify-content: space-between; gap: 8px"><span class="strong">Green Glow</span><span class="strong num">KES 3,000</span></div>
+              <span class="small muted">Pack of 7 bottles · 70 ml each · KES 1,500 each</span>
+              <div class="stepper" style="align-self: flex-start"><button type="button" aria-label="Remove one"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="qty">2</span><button type="button" aria-label="Add one"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+            </div>
+          </div>
+          <h3 style="margin-top: 6px">Order row (account)</h3>
+          <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="strong">#FF-1042</span><span class="chip chip-out">Out for delivery</span></div>
+            <span class="small muted">Thu 23 Oct · Delivery · M-Pesa paid</span>
+            <span class="small">Green Glow, Pack of 7 × 70 ml ×1 · Beet Boost, 500 ml ×1</span>
+            <div style="display: flex; justify-content: space-between; align-items: center"><span class="strong num">KES 2,050</span><button class="btn btn-secondary btn-sm" type="button">Order again</button></div>
+          </div>
+          <h3 style="margin-top: 6px">Stat card</h3>
+          <div class="card stat"><span class="small muted">Revenue</span><span class="stat-val">KES 48,600</span><span class="delta">+12% on the 7 days before</span></div>
+        </section>
+
+        <section class="sec" style="grid-column: 1 / -1">
+          <h3>Table</h3>
+          <div class="panel" style="overflow: hidden">
+            <sc-raw-table class="tbl">
+              <sc-raw-thead><sc-raw-tr><sc-raw-th scope="col">Product</sc-raw-th><sc-raw-th scope="col" class="r">Units sold</sc-raw-th><sc-raw-th scope="col" class="r">Revenue</sc-raw-th></sc-raw-tr></sc-raw-thead>
+              <sc-raw-tbody>
+                <sc-raw-tr><sc-raw-td>Green Glow</sc-raw-td><sc-raw-td class="r num">142</sc-raw-td><sc-raw-td class="r num">KES 21,300</sc-raw-td></sc-raw-tr>
+                <sc-raw-tr class="sel"><sc-raw-td>Sunrise Mango</sc-raw-td><sc-raw-td class="r num">118</sc-raw-td><sc-raw-td class="r num">KES 18,900</sc-raw-td></sc-raw-tr>
+                <sc-raw-tr><sc-raw-td>Carrot Cake</sc-raw-td><sc-raw-td class="r num">9</sc-raw-td><sc-raw-td class="r num">KES 19,800</sc-raw-td></sc-raw-tr>
+              </sc-raw-tbody>
+            </sc-raw-table>
+          </div>
+        </section>
+
+        <section class="sec" style="grid-column: 1 / -1">
+          <h3>Empty, loading &amp; error states</h3>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+            <div class="card" style="padding: 22px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+              <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--green-soft); color: var(--green-text); display: flex; align-items: center; justify-content: center"><svg width="26" height="26" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg></span>
+              <span class="strong">Your cart is empty</span>
+              <span class="small muted">Pick a drink you'll love.</span>
+              <button class="btn btn-primary btn-sm" type="button">Browse the shop</button>
+            </div>
+            <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 10px" aria-busy="true" aria-label="Loading products">
+              <div class="skel" style="height: 72px; border-radius: 12px"></div>
+              <div class="skel" style="height: 14px; width: 70%"></div>
+              <div class="skel" style="height: 12px; width: 45%"></div>
+              <div class="skel" style="height: 40px; border-radius: 10px"></div>
+            </div>
+            <div class="card" style="padding: 22px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+              <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--berry-soft); color: var(--berry-text); display: flex; align-items: center; justify-content: center"><svg width="26" height="26" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg></span>
+              <span class="strong">We couldn't load the shop</span>
+              <span class="small muted">Check your connection and try again.</span>
+              <button class="btn btn-secondary btn-sm" type="button">Try again</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1760,&quot;height&quot;:2600}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      themes: [
+        { name: 'Light', cls: 'th-light' },
+        { name: 'Dark', cls: 'th-dark' }
+      ]
+    };
+  }
+}
+</script>
+
+
+</body></html>

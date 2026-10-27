@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Account, desktop</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+</style>
+</helmet>
+<div class="board" style="width: 2680px; min-height: 1500px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 1280 · logged in</p>
+      <div class="ff {{t.cls}} desk" style="padding-bottom: 64px">
+        <header style="border-bottom: 1px solid var(--line); background: var(--surface)">
+          <div class="wrap" style="display: flex; align-items: center; gap: 24px; height: 80px">
+            <a href="Shop-Desktop.dc.html" aria-label="FruityFlavours home"><img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 120px"></a>
+            <nav style="display: flex; gap: 4px; margin-right: auto" aria-label="Main"><a class="hnav" href="Shop-Desktop.dc.html">Shop</a><a class="hnav on" href="#" aria-current="page">Account</a></nav>
+            <a class="btn btn-secondary" href="Cart-Desktop.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="17" cy="20" r="1.4"></circle></svg>Cart (3)</a>
+          </div>
+        </header>
+        <div class="wrap" style="padding-top: 40px; display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 32px; align-items: start">
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px">
+              <span style="width: 64px; height: 64px; border-radius: 50%; background: var(--orange); color: var(--on-orange); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px">WK</span>
+              <div><h1 class="h1">Habari, Wanjiru</h1><p class="muted">0712 345 678 · wanjiru.k@example.com</p></div>
+              <button class="btn btn-secondary btn-sm" type="button" style="align-self: flex-start">Log out</button>
+            </section>
+            <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 8px" aria-label="Saved delivery address">
+              <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h3">Saved delivery address</h2><button class="btn btn-ghost btn-sm" type="button" style="color: var(--green-text)">Edit</button></div>
+              <p>Kandisi Road, Maasai Lodge estate, house 14 (green gate)</p>
+              <span class="small muted" style="display: flex; align-items: center; gap: 6px"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Location pin saved</span>
+            </section>
+            <section class="card" style="overflow: hidden" aria-label="Messages">
+              <h2 class="h3" style="padding: 20px 24px 8px">Messages</h2>
+              <ul>
+                <sc-for list="{{messages}}" as="m" hint-placeholder-count="3">
+                  <li style="display: flex; gap: 12px; padding: 14px 24px; border-top: 1px solid var(--line)"><span class="dot" style="margin-top: 7px; background: {{m.dot}}"></span><div style="display: flex; flex-direction: column; gap: 2px"><span class="small" style="font-weight: {{m.weight}}">{{m.text}}</span><span style="font-size: 12px" class="muted">{{m.when}}</span></div></li>
+                </sc-for>
+              </ul>
+            </section>
+          </div>
+
+          <section class="card" style="overflow: hidden" aria-label="Order history">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 22px 24px"><h2 class="h2">Your orders</h2><span class="small muted">3 orders</span></div>
+            <sc-for list="{{orders}}" as="o" hint-placeholder-count="3">
+              <article style="display: grid; grid-template-columns: 1fr auto; gap: 14px 24px; padding: 20px 24px; border-top: 1px solid var(--line)">
+                <div style="display: flex; flex-direction: column; gap: 6px">
+                  <div style="display: flex; align-items: center; gap: 12px"><span class="h3">{{o.no}}</span><span class="{{o.chip}}">{{o.status}}</span></div>
+                  <span class="small muted">{{o.date}} · {{o.how}}</span>
+                  <ul style="display: flex; flex-direction: column; gap: 2px; margin-top: 4px"><sc-for list="{{o.items}}" as="it" hint-placeholder-count="2"><li>{{it}}</li></sc-for></ul>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+                  <span class="h3 num">KES {{o.total}}</span>
+                  <span style="font-size: 13px; font-weight: 650; color: {{o.payColor}}">{{o.pay}}</span>
+                  <button class="btn btn-secondary btn-sm" type="button" style="margin-top: 6px"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"></path></svg>Order again</button>
+                </div>
+              </article>
+            </sc-for>
+          </section>
+        </div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:2680,&quot;height&quot;:1500}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      orders: [
+        { no: '#FF-1043', date: 'Today, 10:12', how: 'Delivery to Kandisi Road', status: 'Preparing', chip: 'chip chip-prep', items: ['Green Glow · Pack of 7 bottles, 70 ml each ×1', 'Sunrise Mango · Single bottle, 500 ml ×2'], total: '2,550', pay: 'M-Pesa paid · incl. KES 150 delivery', payColor: 'var(--green-text)' },
+        { no: '#FF-1031', date: 'Sat 18 Oct, 14:05', how: 'Pickup · Rongai Gate Kiosk', status: 'Completed', chip: 'chip chip-done', items: ['Carrot Cake · 1 kg cake ×1'], total: '2,200', pay: 'Paid at pickup', payColor: 'var(--muted)' },
+        { no: '#FF-1007', date: 'Fri 3 Oct, 09:40', how: 'Delivery to Kandisi Road', status: 'Cancelled', chip: 'chip chip-cancel', items: ['Beet Boost · Single bottle, 500 ml ×3'], total: '1,350', pay: 'Not charged', payColor: 'var(--muted)' }
+      ],
+      messages: [
+        { text: 'Order #FF-1043: payment received. We are preparing it now.', when: 'Today, 10:14', dot: 'var(--green)', weight: 650 },
+        { text: 'Order #FF-1031 is ready at Rongai Gate Kiosk.', when: 'Sat 18 Oct, 15:40', dot: 'var(--line-strong)', weight: 400 },
+        { text: 'Pineapple Mint Fizz is coming soon. We will tell you when it lands.', when: 'Thu 16 Oct', dot: 'var(--line-strong)', weight: 400 }
+      ]
+    };
+  }
+}
+</script>
+
+
+</body></html>

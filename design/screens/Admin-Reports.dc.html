@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Admin reports</title>
+<link rel="stylesheet" href="../ff.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+
+<style>
+body{margin:0}
+a{color:#2f6b3c}a:hover{color:#265a32}
+.blk{padding:20px;display:flex;flex-direction:column;gap:14px}
+.stack{display:flex;height:14px;border-radius:999px;overflow:hidden;gap:2px}
+.leg{display:flex;align-items:center;gap:8px;font-size:14px}
+.leg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+</style>
+</helmet>
+<div class="board" style="width: 2680px; min-height: 1560px; padding: 40px; display: flex; gap: 40px; align-items: flex-start">
+  <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+    <div style="display: flex; flex-direction: column">
+      <p class="cap">{{t.name}} · 1280</p>
+      <div class="ff {{t.cls}} desk" style="display: flex; min-height: 1400px; font-size: 15px">
+        <aside class="side" aria-label="Admin">
+          <img class="logo" src="../assets/logo.png" alt="FruityFlavours" style="width: 104px; margin: 0 0 4px 10px">
+          <span class="micro muted" style="padding: 0 12px 14px">Admin</span>
+          <a class="nav" href="Admin-Orders.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"></path></svg>Orders<span class="n">3</span></a>
+          <a class="nav" href="Admin-Catalog.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"></path><path d="M3 7.5l9 4.5 9-4.5M12 12v9"></path></svg>Catalog</a>
+          <a class="nav on" href="#" aria-current="page"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Reports</a>
+          <a class="nav" href="Admin-Notifications.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>Notifications</a>
+          <a class="nav" href="Admin-Settings.dc.html"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>Settings</a>
+          <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px"><a class="nav" href="Shop-Desktop.dc.html">View shop</a><a class="nav" href="Admin-SignIn.dc.html">Sign out</a></div>
+        </aside>
+
+        <main style="flex: 1; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <h1 class="h1" style="margin-right: auto">Reports</h1>
+            <button class="btn btn-secondary" type="button"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Export CSV</button>
+          </div>
+
+          <section class="panel" style="padding: 16px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px" aria-label="Filters">
+            <div class="field" style="width: 210px">
+              <label class="label" for="rt-{{t.cls}}">Product type</label>
+              <div class="select-wrap"><sc-raw-select class="input" id="rt-{{t.cls}}" style="min-height: 44px" value="{{type}}" sc-camel-on-change="{{onType}}"><option value="all">All products</option><option value="drinks">Drinks</option><option value="cakes">Cakes</option></sc-raw-select><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div>
+            </div>
+            <div style="width: 1px; align-self: stretch; background: var(--line)"></div>
+            <div class="field" style="width: 150px"><label class="label" for="rf-{{t.cls}}">From</label><input class="input" id="rf-{{t.cls}}" value="{{from}}" style="min-height: 44px"></div>
+            <div class="field" style="width: 150px"><label class="label" for="rto-{{t.cls}}">To</label><input class="input" id="rto-{{t.cls}}" value="24 Oct 2026" style="min-height: 44px"></div>
+            <div style="display: flex; gap: 6px" role="group" aria-label="Quick date ranges">
+              <sc-for list="{{ranges}}" as="rg" hint-placeholder-count="4"><button class="{{rg.cls}}" type="button" aria-pressed="{{rg.pressed}}" sc-camel-on-click="{{rg.pick}}">{{rg.label}}</button></sc-for>
+            </div>
+          </section>
+
+          <div class="notice notice-info" role="status" style="align-items: center">
+            <svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 8v6l-4-2v-4z"></path></svg>
+            <span style="flex: 1">Showing <strong>{{typeLabel}}</strong> · <strong>{{rangeLabel}}</strong> ({{from}} – 24 Oct 2026)</span>
+            <sc-if value="{{filtered}}" hint-placeholder-val="{{true}}"><button class="btn btn-ghost btn-sm" type="button" sc-camel-on-click="{{clear}}" style="color: inherit; text-decoration: underline">Clear filters</button></sc-if>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+            <sc-for list="{{stats}}" as="s" hint-placeholder-count="6">
+              <div class="panel stat"><span class="small muted">{{s.label}}</span><span class="stat-val" style="font-size: 22px">{{s.value}}</span><span style="font-size: 12px" class="muted">{{s.note}}</span></div>
+            </sc-for>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start">
+            <section class="panel blk" aria-label="Sales by day">
+              <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 class="h3">Sales by day</h2><span class="small muted">KES</span></div>
+              <div style="display: flex; align-items: flex-end; gap: 14px; height: 240px; padding-top: 20px; border-bottom: 1px solid var(--line)" role="img" aria-label="{{chartLabel}}">
+                <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+                  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%">
+                    <span style="font-size: 12px; font-weight: 650" class="num">{{d.label}}</span>
+                    <div style="width: 100%; max-width: 48px; border-radius: 6px 6px 0 0; background: {{d.color}}; height: {{d.h}}"></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display: flex; gap: 14px"><sc-for list="{{days}}" as="d" hint-placeholder-count="7"><span class="small muted" style="flex: 1; text-align: center">{{d.day}}</span></sc-for></div>
+            </section>
+
+            <div style="display: flex; flex-direction: column; gap: 16px">
+              <section class="panel blk" aria-label="Payment method split">
+                <h2 class="h3">By payment method</h2>
+                <div class="stack" aria-hidden="true"><span style="width: 74%; background: var(--green)"></span><span style="width: 18%; background: var(--orange)"></span><span style="width: 8%; background: var(--line-strong)"></span></div>
+                <div style="display: flex; flex-direction: column; gap: 6px">
+                  <div class="leg"><i style="background: var(--green)"></i><span style="flex: 1">M-Pesa</span><span class="num strong">74%</span></div>
+                  <div class="leg"><i style="background: var(--orange)"></i><span style="flex: 1">Pay on delivery</span><span class="num strong">18%</span></div>
+                  <div class="leg"><i style="background: var(--line-strong)"></i><span style="flex: 1">Pay at pickup</span><span class="num strong">8%</span></div>
+                </div>
+              </section>
+              <section class="panel blk" aria-label="Delivery versus pickup split">
+                <h2 class="h3">Delivery vs pickup</h2>
+                <div class="stack" aria-hidden="true"><span style="width: 61%; background: var(--green)"></span><span style="width: 39%; background: var(--orange)"></span></div>
+                <div style="display: flex; flex-direction: column; gap: 6px">
+                  <div class="leg"><i style="background: var(--green)"></i><span style="flex: 1">Delivery</span><span class="num strong">61% · {{deliveries}} orders</span></div>
+                  <div class="leg"><i style="background: var(--orange)"></i><span style="flex: 1">Pickup</span><span class="num strong">39% · {{pickups}} orders</span></div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <section class="panel" style="overflow: hidden" aria-label="Top products">
+            <div style="padding: 18px 18px 6px"><h2 class="h3">Top products</h2></div>
+            <sc-raw-table class="tbl">
+              <sc-raw-thead><sc-raw-tr><sc-raw-th scope="col" style="padding-left: 18px">Product</sc-raw-th><sc-raw-th scope="col">Type</sc-raw-th><sc-raw-th scope="col" class="r">Units sold</sc-raw-th><sc-raw-th scope="col" class="r" style="padding-right: 18px">Revenue</sc-raw-th></sc-raw-tr></sc-raw-thead>
+              <sc-raw-tbody>
+                <sc-for list="{{top}}" as="p" hint-placeholder-count="5">
+                  <sc-raw-tr><sc-raw-td style="padding-left: 18px; font-weight: 650">{{p.name}}</sc-raw-td><sc-raw-td><span class="badge badge-cat" style="height: 22px; font-size: 12px">{{p.type}}</span></sc-raw-td><sc-raw-td class="r num">{{p.units}}</sc-raw-td><sc-raw-td class="r num" style="padding-right: 18px; font-weight: 650">KES {{p.rev}}</sc-raw-td></sc-raw-tr>
+                </sc-for>
+              </sc-raw-tbody>
+            </sc-raw-table>
+          </section>
+        </main>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:2680,&quot;height&quot;:1560}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 'drinks', range: '7d' };
+  }
+  renderVals() {
+    const s = this.state;
+    const fmt = (n) => Math.round(n).toLocaleString('en-US');
+    const R = { today: { label: 'Today', from: '24 Oct 2026', f: 0.16 }, '7d': { label: 'Last 7 days', from: '18 Oct 2026', f: 1 }, '30d': { label: 'Last 30 days', from: '25 Sep 2026', f: 4.1 }, all: { label: 'All time', from: '2 Mar 2026', f: 18.4 } };
+    const T = { all: { label: 'All products', rev: 48600, orders: 31, bottles: 112, other: 9 }, drinks: { label: 'Drinks', rev: 33800, orders: 26, bottles: 112, other: 0 }, cakes: { label: 'Cakes', rev: 14800, orders: 9, bottles: 0, other: 9 } };
+    const r = R[s.range], ty = T[s.type];
+    const orders = Math.max(1, Math.round(ty.orders * r.f));
+    const deliveries = Math.round(orders * 0.61);
+    const top = [
+      { name: 'Green Glow', type: 'Drinks', units: 46, rev: 13900 },
+      { name: 'Carrot Cake', type: 'Cakes', units: 7, rev: 14800 },
+      { name: 'Sunrise Mango', type: 'Drinks', units: 38, rev: 11200 },
+      { name: 'Beet Boost', type: 'Drinks', units: 21, rev: 6300 },
+      { name: 'Berry Oat Smoothie', type: 'Drinks', units: 5, rev: 2400 }
+    ].filter((p) => s.type === 'all' || p.type.toLowerCase() === s.type)
+      .sort((a, b) => b.rev - a.rev)
+      .map((p) => ({ ...p, units: fmt(p.units * r.f), rev: fmt(p.rev * r.f) }));
+    const dayVals = [0.11, 0.13, 0.09, 0.16, 0.14, 0.21, 0.16];
+    const names = ['Sat 18', 'Sun 19', 'Mon 20', 'Tue 21', 'Wed 22', 'Thu 23', 'Fri 24'];
+    const max = Math.max(...dayVals);
+    const days = dayVals.map((v, i) => ({ day: names[i], label: (ty.rev * v / 1000).toFixed(1) + 'k', h: Math.round(v / max * 180) + 'px', color: i === dayVals.indexOf(max) ? 'var(--orange)' : 'var(--green)' }));
+    const opt = (list, key, cur) => list.map(([id, label]) => ({ label, cls: (id === cur ? 'pill on' : 'pill') + ' pill-sm', pressed: id === cur ? 'true' : 'false', pick: () => this.setState({ [key]: id }) }));
+    return {
+      themes: [{ name: 'Light', cls: 'th-light' }, { name: 'Dark', cls: 'th-dark' }],
+      typeLabel: ty.label,
+      rangeLabel: r.label,
+      from: r.from,
+      filtered: s.type !== 'all' || s.range !== '7d',
+      clear: () => this.setState({ type: 'all', range: '7d' }),
+      type: s.type,
+      onType: (e) => this.setState({ type: e.target.value }),
+      ranges: opt([['today', 'Today'], ['7d', 'Last 7 days'], ['30d', 'Last 30 days'], ['all', 'All time']], 'range', s.range),
+      stats: [
+        { label: 'Revenue', value: 'KES ' + fmt(ty.rev * r.f), note: 'Excl. delivery fees' },
+        { label: 'Orders', value: fmt(orders), note: 'Paid or completed' },
+        { label: 'Bottles sold', value: fmt(ty.bottles * r.f), note: 'Packs count each bottle' },
+        { label: 'Other products', value: fmt(ty.other * r.f), note: 'Cakes and more' },
+        { label: 'Average order', value: 'KES ' + fmt(ty.rev * r.f / orders), note: 'Revenue ÷ orders' },
+        { label: 'Delivery fees', value: 'KES ' + fmt(deliveries * 150), note: deliveries + ' deliveries × 150' }
+      ],
+      chartLabel: 'Sales by day for ' + ty.label + ', highest on Thursday 23 October',
+      days,
+      deliveries,
+      pickups: orders - deliveries,
+      top
+    };
+  }
+}
+</script>
+
+
+</body></html>
